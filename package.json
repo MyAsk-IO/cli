@@ -1,0 +1,85 @@
+{
+  "name": "@myask-io/cli",
+  "description": "MyAsk CLI allows users to interact with the MyAsk API directly from their local command line massively streamlining programmer workflow",
+  "version": "0.0.1",
+  "author": "Andrew Chaney (netuoso)",
+  "bin": {
+    "myask": "./bin/run.js"
+  },
+  "bugs": "https://github.com/MyAsk-IO/cli/issues",
+  "dependencies": {
+    "@oclif/core": "^4",
+    "@oclif/plugin-help": "^6",
+    "@oclif/plugin-plugins": "^5",
+    "axios": "^1.7.9",
+    "better-sqlite3": "^11.8.1",
+    "chalk": "^5.4.1",
+    "cli-highlight": "^2.1.11",
+    "inquirer": "^12.4.1",
+    "ora": "^8.2.0",
+    "sqlite3": "^5.1.7"
+  },
+  "devDependencies": {
+    "@eslint/compat": "^1",
+    "@oclif/prettier-config": "^0.2.1",
+    "@oclif/test": "^4",
+    "@types/better-sqlite3": "^7.6.12",
+    "@types/chai": "^4",
+    "@types/mocha": "^10",
+    "@types/node": "^18",
+    "chai": "^4",
+    "eslint": "^9",
+    "eslint-config-oclif": "^6",
+    "eslint-config-prettier": "^10",
+    "mocha": "^10",
+    "oclif": "^4",
+    "shx": "^0.3.3",
+    "ts-node": "^10",
+    "typescript": "^5"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "files": [
+    "./bin",
+    "./dist",
+    "./oclif.manifest.json"
+  ],
+  "homepage": "https://github.com/MyAsk-IO/cli",
+  "keywords": [
+    "oclif"
+  ],
+  "license": "MIT",
+  "main": "dist/index.js",
+  "type": "module",
+  "oclif": {
+    "bin": "myask",
+    "dirname": "myask",
+    "commands": "./dist/commands",
+    "macos": {
+      "identifier": "com.myaskio.cli"
+    },
+    "plugins": [
+      "@oclif/plugin-help",
+      "@oclif/plugin-plugins"
+    ],
+    "topicSeparator": ":",
+    "topics": {
+      "api": {
+        "description": "Commands for interacting with MyAsk API"
+      }
+    }
+  },
+  "repository": "https://github.com/MyAsk-IO/cli",
+  "scripts": {
+    "build": "shx rm -rf dist && tsc -b",
+    "bk": "npm run build && npm link",
+    "lint": "eslint",
+    "postpack": "shx rm -f oclif.manifest.json",
+    "posttest": "npm run lint",
+    "prepack": "oclif manifest && oclif readme",
+    "test": "mocha --forbid-only \"test/**/*.test.ts\"",
+    "version": "oclif readme && git add README.md"
+  },
+  "types": "dist/index.d.ts"
+}

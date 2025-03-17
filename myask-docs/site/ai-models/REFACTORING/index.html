@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../img/favicon.ico">
+        <title>Code Refactoring - CLaiRE CLI Documentation</title>
+        <link href="../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../../css/brands.min.css" rel="stylesheet">
+        <link href="../../css/solid.min.css" rel="stylesheet">
+        <link href="../../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../..">CLaiRE CLI Documentation</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href="https://claire.ac" class="nav-link">Application</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="https://github.com/CLaiRE-AC/CLaiRE" class="nav-link">Github</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../.." class="nav-link">Documention Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../CLI/" class="nav-link">Installing CLI</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../OVERVIEW/" class="nav-link">Models Overview</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="./" class="nav-link active" aria-current="page">Code Refactoring</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../code-files/ask.ts/" class="nav-link">ask.ts Source File</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a rel="prev" href="../OVERVIEW/" class="nav-link">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" href="../code-files/ask.ts/" class="nav-link">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#refactoring-code" class="nav-link">Refactoring Code</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#models" class="nav-link">Models</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#breakdown" class="nav-link">Breakdown</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#1-o3-mini-token-cost-0" class="nav-link">1. o3-mini (Token Cost: 0)</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#2-o1-mini-token-cost-1" class="nav-link">2. o1-mini (Token Cost: 1)</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#3-gpt-4o-mini-token-cost-2" class="nav-link">3. gpt-4o-mini (Token Cost: 2)</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#4-gpt-4o-token-cost-3" class="nav-link">4. gpt-4o (Token Cost: 3)</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#5-chatgpt-4o-latest-token-cost-4" class="nav-link">5. chatgpt-4o-latest (Token Cost: 4)</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#summary" class="nav-link">Summary</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="refactoring-code">Refactoring Code</h1>
+<p><br/><br/></p>
+<h2 id="models">Models</h2>
+<ul>
+<li>o3-mini</li>
+<li>o1-mini</li>
+<li>gpt-4o-mini</li>
+<li>gpt-4o</li>
+<li>chatgpt-4o-latest</li>
+</ul>
+<p><br/><br/></p>
+<h2 id="breakdown">Breakdown</h2>
+<p>Refactoring breakdown example of <a href="../code-files/ask.ts/">ask.ts</a></p>
+<p>Below is one way to describe what refactoring might look like for each "model" (here understood as a refactoring‐strategy level) along with the corresponding "cost" in OpenAI tokens. In our example, the dictionary</p>
+<p>{ "o3-mini": 0, "o1-mini": 1, "gpt-4o-mini": 2, "gpt-4o": 3, "chatgpt-4o-latest": 4 }</p>
+<p>indicates that the simplest "refactoring model" (o3-mini) would propose almost no changes (0 tokens) while the most "expensive" one (chatgpt-4o-latest) would outline a comprehensive refactor (costing 4 tokens).</p>
+<p>Below are sample refactoring approaches for each "model":</p>
+<p><br/><br/></p>
+<hr />
+<h2 id="1-o3-mini-token-cost-0">1. o3-mini (Token Cost: 0)</h2>
+<hr />
+<ul>
+<li>Minimal changes only—essentially "no‐refactor."<br />
+    – Leave the code structure mostly intact.<br />
+    – Perhaps perform very light cleanup (for example, consolidating redundant import statements or fixing minor spacing/formatting issues).  </li>
+<li>Outcome: Code remains almost as originally written with nearly zero additional processing cost.</li>
+</ul>
+<p><br/><br/></p>
+<hr />
+<h2 id="2-o1-mini-token-cost-1">2. o1-mini (Token Cost: 1)</h2>
+<hr />
+<ul>
+<li>Light refactoring with one or two minor improvements.<br />
+    – Extract the small utility (for example, the extractErrorMessage method) so that error handling is slightly centralized.<br />
+    – Simplify minor code repetitiveness (such as unifying similar error messages).  </li>
+<li>Outcome: A few methods moved to a helper file with a small cost (1 token).</li>
+</ul>
+<p><br/><br/></p>
+<hr />
+<h2 id="3-gpt-4o-mini-token-cost-2">3. gpt-4o-mini (Token Cost: 2)</h2>
+<hr />
+<ul>
+<li>Moderate refactoring with a couple of clear improvements.<br />
+    – Separate concerns by moving API interaction logic (submitQuestion and pollForResponse) into its own service module.<br />
+    – Clean up the command’s control flow (for example, isolate file reading and prompt gathering into separate helper functions).  </li>
+<li>Outcome: The source code is split into distinct modules (for config, API calls, and CLI handling) and is easier to maintain.  </li>
+<li>Token cost: Around 2 tokens for the improvements.</li>
+</ul>
+<p><br/><br/></p>
+<hr />
+<h2 id="4-gpt-4o-token-cost-3">4. gpt-4o (Token Cost: 3)</h2>
+<hr />
+<ul>
+<li>More extensive refactoring with several structural changes.<br />
+    – Modularize the code: create separate modules for configuration (loadConfig), API handling (HTTP calls via axios), and the CLI interface (ask command).<br />
+    – Improve error handling (for example, centralize error logging or add custom error classes).<br />
+    – Introduce better type definitions and possibly separate business logic from user interaction.  </li>
+<li>Outcome: The code is reorganized into cohesive units that are more testable and maintainable, at a cost estimated around 3 tokens.</li>
+</ul>
+<p><br/><br/></p>
+<hr />
+<h2 id="5-chatgpt-4o-latest-token-cost-4">5. chatgpt-4o-latest (Token Cost: 4)</h2>
+<hr />
+<ul>
+<li>Full-blown comprehensive refactor that touches almost every aspect of the module.<br />
+    – Refactor the command into a thin controller layer while offloading API interactions, file input handling, and error management into separate, well-documented service modules.<br />
+    – Adopt a consistent coding style (e.g. uniform quotation marks, standardized async/await error handling) across the entire file.<br />
+    – Introduce a robust logging mechanism and possibly integrate automated testing for the refactored modules.<br />
+    – Optionally rework the polling logic to use more sophisticated patterns (such as an event-driven design or reactive streams) if needed.  </li>
+<li>Outcome: A thoroughly modernized codebase that supports maintainability, scalability, and easier debugging, with the improvements "costing" about 4 tokens in estimated OpenAI usage.</li>
+</ul>
+<p><br/><br/></p>
+<hr />
+<h2 id="summary">Summary</h2>
+<hr />
+<p>Each "model" in our list represents a different "level" of refactoring intensity, with the number indicating the estimated token count (or "cost") to generate that full refactor plan via an API call. Lower token costs (0–1) mean very little change, while higher costs (3–4) mean a comprehensive, multi-step transformation. The above breakdown serves as one interpretation of how you might refactor the provided ask.ts file in progressively larger "chunks" of change.</p></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../js/base.js"></script>
+        <script src="../../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>
