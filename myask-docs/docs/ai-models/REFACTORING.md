@@ -14,7 +14,7 @@
 
 ## Breakdown
 
-Refactoring breakdown example of [ask.ts](code-files/ask.ts.md)
+Refactoring breakdown example of [prompt.ts](code-files/prompt.ts.md)
 
 Below is one way to describe what refactoring might look like for each "model" (here understood as a refactoring‐strategy level) along with the corresponding "cost" in OpenAI tokens. In our example, the dictionary
 
@@ -89,4 +89,4 @@ Below are sample refactoring approaches for each "model":
 ## Summary
 ---
 
-Each "model" in our list represents a different "level" of refactoring intensity, with the number indicating the estimated token count (or "cost") to generate that full refactor plan via an API call. Lower token costs (0–1) mean very little change, while higher costs (3–4) mean a comprehensive, multi-step transformation. The above breakdown serves as one interpretation of how you might refactor the provided ask.ts file in progressively larger "chunks" of change.
+Each "model" in our list represents a different "level" of refactoring intensity, with the number indicating the estimated token count (or "cost") to generate that full refactor plan via an API call. Lower token costs (0–1) mean very little change, while higher costs (3–4) mean a comprehensive, multi-step transformation. The above breakdown serves as one interpretation of how you might refactor the provided prompt.ts file in progressively larger "chunks" of change.

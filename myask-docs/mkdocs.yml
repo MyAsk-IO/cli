@@ -6,4 +6,4 @@ nav:
   - Installing CLI: CLI.md
   - Models Overview: ai-models/OVERVIEW.md
   - Code Refactoring: ai-models/REFACTORING.md
-  - ask.ts Source File: ai-models/code-files/prompt.ts.md
+  - prompt.ts Source File: ai-models/code-files/prompt.ts.md

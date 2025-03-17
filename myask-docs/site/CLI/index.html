@@ -8,7 +8,7 @@
         
         
         <link rel="shortcut icon" href="../img/favicon.ico">
-        <title>Installing CLI - CLaiRE CLI Documentation</title>
+        <title>Installing CLI - MyAsk CLI Documentation</title>
         <link href="../css/bootstrap.min.css" rel="stylesheet">
         <link href="../css/fontawesome.min.css" rel="stylesheet">
         <link href="../css/brands.min.css" rel="stylesheet">
@@ -24,7 +24,7 @@
     <body>
         <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
             <div class="container">
-                <a class="navbar-brand" href="..">CLaiRE CLI Documentation</a>
+                <a class="navbar-brand" href="..">MyAsk CLI Documentation</a>
                 <!-- Expander button -->
                 <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -35,10 +35,10 @@
                         <!-- Main navigation -->
                         <ul class="nav navbar-nav">
                             <li class="nav-item">
-                                <a href="https://claire.ac" class="nav-link">Application</a>
+                                <a href="https://myask.io" class="nav-link">Application</a>
                             </li>
                             <li class="nav-item">
-                                <a href="https://github.com/CLaiRE-AC/CLaiRE" class="nav-link">Github</a>
+                                <a href="https://github.com/MyAsk-IO/cli" class="nav-link">Github</a>
                             </li>
                             <li class="nav-item">
                                 <a href=".." class="nav-link">Documention Home</a>
@@ -53,7 +53,7 @@
                                 <a href="../ai-models/REFACTORING/" class="nav-link">Code Refactoring</a>
                             </li>
                             <li class="nav-item">
-                                <a href="../ai-models/code-files/ask.ts/" class="nav-link">ask.ts Source File</a>
+                                <a href="../ai-models/code-files/prompt.ts/" class="nav-link">prompt.ts Source File</a>
                             </li>
                         </ul>
 
@@ -138,27 +138,27 @@
 <li>
 <h4 id="npmjs">NPMjs</h4>
 <ul>
-<li><code>npm install -g @claire-ac/cli</code></li>
+<li><code>npm install -g @myask-io/cli</code></li>
 </ul>
 </li>
 </ul>
 <h2 id="initialize-the-cli">Initialize the CLI</h2>
 <ul>
-<li><code>claire init</code></li>
+<li><code>myask init</code></li>
 </ul>
 <h2 id="configuring">Configuring</h2>
 <ul>
-<li><code>claire config</code></li>
+<li><code>myask config</code></li>
 <li>
-<p><code>claire config -t {API_TOKEN}</code></p>
+<p><code>myask config -t {API_TOKEN}</code></p>
 <ul>
-<li>find your CLaiRE API token in your admin dashboard <code>https://claire.ac/admin</code></li>
+<li>find your CLaiRE API token in your admin dashboard <code>https://myask.io/admin</code></li>
 </ul>
 </li>
 </ul>
 <h2 id="creating-projects">Creating Projects</h2>
 <ul>
-<li><code>claire api:project:create</code></li>
+<li><code>myask api:project:create</code></li>
 </ul>
 <pre><code> - name
  - description
@@ -167,41 +167,41 @@
 </code></pre>
 <h2 id="setting-current-project">Setting Current Project</h2>
 <ul>
-<li><code>claire api:project:set</code><ul>
+<li><code>myask api:project:set</code><ul>
 <li>no flags necessary; choose project from list to set as current project for API</li>
 </ul>
 </li>
 </ul>
 <h2 id="sending-ai-prompts">Sending AI Prompts</h2>
 <ul>
-<li><code>claire ask</code></li>
-<li><code>claire ask -p "prompt goes here"</code></li>
+<li><code>myask ask</code></li>
+<li><code>myask ask -p "prompt goes here"</code></li>
 <li>
-<p><code>claire ask -F path/to/input/file</code></p>
+<p><code>myask ask -F path/to/input/file</code></p>
 <ul>
-<li>if no flags supplied <code>claire</code> prompts you on the command line</li>
+<li>if no flags supplied <code>myask</code> prompts you on the command line</li>
 </ul>
 </li>
 <li>
-<p><code>claire ask</code> allows you to supply both a prompt using the <code>-p</code> tag as well as an input file using <code>-F</code></p>
+<p><code>myask ask</code> allows you to supply both a prompt using the <code>-p</code> tag as well as an input file using <code>-F</code></p>
 </li>
-<li><code>claire ask</code> allows you to supply multiple input files using the following format:<ul>
-<li><code>claire ask -F path/to/input1 -F path/to/input2</code></li>
+<li><code>myask ask</code> allows you to supply multiple input files using the following format:<ul>
+<li><code>myask ask -F path/to/input1 -F path/to/input2</code></li>
 </ul>
 </li>
-<li><code>claire ask -p "Analye the following files, refactor if necessary, and merge into a single source file" -F path/to/source1 -F path/to/source 2</code></li>
+<li><code>myask ask -p "Analye the following files, refactor if necessary, and merge into a single source file" -F path/to/source1 -F path/to/source 2</code></li>
 </ul>
 <h2 id="view-api-data">View API Data</h2>
 <ul>
-<li><code>claire api:project:show --list</code></li>
-<li><code>claire api:project:show {PROJECT_ID}</code></li>
-<li><code>claire api:question:show --list</code></li>
-<li><code>claire api:question:show {QUESTION_ID}</code></li>
+<li><code>myask api:project:show --list</code></li>
+<li><code>myask api:project:show {PROJECT_ID}</code></li>
+<li><code>myask api:question:show --list</code></li>
+<li><code>myask api:question:show {QUESTION_ID}</code></li>
 </ul>
 <h2 id="invite-users-to-claire">Invite Users to CLaiRE</h2>
 <ul>
-<li><code>claire api:invitation:create {USER_EMAIL}</code><ul>
-<li>if no <code>{USER_EMAIL}</code> supplied <code>claire</code> will prompt for one on the command line</li>
+<li><code>myask api:invitation:create {USER_EMAIL}</code><ul>
+<li>if no <code>{USER_EMAIL}</code> supplied <code>myask</code> will prompt for one on the command line</li>
 </ul>
 </li>
 </ul></div>
