@@ -1,10 +1,10 @@
 # Source Code
 
-## Example code from "@claire-ac/cli"
+## Example code from "@MyAskIO/cli"
 
-### - <a href="https://github.com/CLaiRE-AC/CLaiRE/blob/v0.0.6/src/commands/ask.ts" target="_blank">ask.ts on Github</a>
+### - <a href="https://github.com/MyAsk-IO/cli/blob/main/src/commands/prompt.ts" target="_blank">prompt.ts on Github</a>
 
-Source code file for construction AI prompts for the <a href="https://claire.ac/" target="_blank">CLaiRE API</a>
+Source code file for constructing AI prompts for the <a href="https://myask.io/" target="_blank">MyAsk Website</a>
 
 ```typescript
   import { Command, Flags } from "@oclif/core";
@@ -16,7 +16,7 @@ Source code file for construction AI prompts for the <a href="https://claire.ac/
   import { formatCodeBlocks } from "../utils/codeFormatter.js";
 
   export default class Ask extends Command {
-    static description = "Send a prompt to CLaiRE API and retrieve a response.";
+    static description = "Send a prompt to MyAsk API and retrieve a response.";
 
     static flags = {
       prompt: Flags.string({ char: "p", description: "Prompt to send" }),
@@ -38,11 +38,11 @@ Source code file for construction AI prompts for the <a href="https://claire.ac/
       const { id: projectId } = loadConfig().project;
 
       if (!authToken) {
-        this.error("Missing CLaiRE API token. Set it using `claire config -k YOUR_AUTH_TOKEN`.");
+        this.error("Missing MyAsk API token. Set it using `myask config -k YOUR_AUTH_TOKEN`.");
       }
 
       if (!projectId) {
-        this.error("CLaiRE Project Not Set. Set it using `claire api:project:set`.");
+        this.error("MyAsk Project Not Set. Set it using `myask api:project:set`.");
       }
 
       let content = await this.getInitialQuestion(flags);
@@ -57,7 +57,7 @@ Source code file for construction AI prompts for the <a href="https://claire.ac/
 
           const response = await this.pollForResponse(apiHost, authToken, questionId);
 
-          this.log("\n💡 CLaiRE API Response:");
+          this.log("\n💡 MyAsk API Response:");
           this.log(formatCodeBlocks(response));
 
           const { isFollowUp } = await inquirer.prompt([
@@ -94,7 +94,7 @@ Source code file for construction AI prompts for the <a href="https://claire.ac/
     }
 
     private async pollForResponse(apiHost: string, authToken: string, questionId: number): Promise<string> {
-      const spinner = ora({ text: "🔄 Waiting for response from CLaiRE API...", spinner: cliSpinners.dots }).start();
+      const spinner = ora({ text: "🔄 Waiting for response from MyAsk API...", spinner: cliSpinners.dots }).start();
       const maxRetries = 50;
       let attempt = 0;
 
@@ -113,7 +113,7 @@ Source code file for construction AI prompts for the <a href="https://claire.ac/
           const errorMessage = this.extractErrorMessage(error);
 
           if (error.response?.data?.errors?.includes("Response doesn't exist")) {
-            spinner.text = `⏳ Still waiting for CLaiRE API response... [Attempt: ${attempt + 1}/10]`;
+            spinner.text = `⏳ Still waiting for MyAsk API response... [Attempt: ${attempt + 1}/10]`;
           } else {
             spinner.fail(`❌ Error fetching response: ${errorMessage}`);
             throw new Error(errorMessage);
@@ -123,8 +123,8 @@ Source code file for construction AI prompts for the <a href="https://claire.ac/
         attempt++;
       }
 
-      spinner.fail("❌ Timed out waiting for CLaiRE API response.");
-      throw new Error("No response received from CLaiRE API after multiple attempts.");
+      spinner.fail("❌ Timed out waiting for MyAsk API response.");
+      throw new Error("No response received from MyAsk API after multiple attempts.");
     }
 
     private extractErrorMessage(error: unknown): string {

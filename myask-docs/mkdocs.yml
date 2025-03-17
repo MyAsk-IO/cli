@@ -1,9 +1,9 @@
-site_name: CLaiRE CLI Documentation
+site_name: MyAsk CLI Documentation
 nav:
-  - Application: https://claire.ac
-  - Github: https://github.com/CLaiRE-AC/CLaiRE
+  - Application: https://myask.io
+  - Github: https://github.com/MyAsk-IO/cli
   - Documention Home: index.md
   - Installing CLI: CLI.md
   - Models Overview: ai-models/OVERVIEW.md
   - Code Refactoring: ai-models/REFACTORING.md
-  - ask.ts Source File: ai-models/code-files/ask.ts.md
+  - ask.ts Source File: ai-models/code-files/prompt.ts.md

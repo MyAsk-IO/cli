@@ -1,9 +1,9 @@
-claire
+MyAsk CLI
 =================
 
-Command Line AI Request Experience
+MyAsk CLI allows users to interact with the MyAsk API directly from their local command line massively streamlining programmer workflow
 
-![CLaiRE Logo](claire-social-logo.png)
+![MyAsk Logo](MyAsk-social-logo.png)
 
 
 [![oclif](https://img.shields.io/badge/cli-oclif-brightgreen.svg)](https://oclif.io)
