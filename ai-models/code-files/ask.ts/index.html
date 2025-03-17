@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../../../img/favicon.ico">
+        <title>ask.ts Source File - CLaiRE CLI Documentation</title>
+        <link href="../../../css/bootstrap.min.css" rel="stylesheet">
+        <link href="../../../css/fontawesome.min.css" rel="stylesheet">
+        <link href="../../../css/brands.min.css" rel="stylesheet">
+        <link href="../../../css/solid.min.css" rel="stylesheet">
+        <link href="../../../css/v4-font-face.min.css" rel="stylesheet">
+        <link href="../../../css/base.css" rel="stylesheet">
+        <link id="hljs-light" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" >
+        <link id="hljs-dark" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" disabled>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script>hljs.highlightAll();</script> 
+    </head>
+
+    <body>
+        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="../../..">CLaiRE CLI Documentation</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Expanded navigation -->
+                <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="nav-item">
+                                <a href="https://claire.ac" class="nav-link">Application</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="https://github.com/CLaiRE-AC/CLaiRE" class="nav-link">Github</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../.." class="nav-link">Documention Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../../CLI/" class="nav-link">Installing CLI</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../OVERVIEW/" class="nav-link">Models Overview</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="../../REFACTORING/" class="nav-link">Code Refactoring</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="./" class="nav-link active" aria-current="page">ask.ts Source File</a>
+                            </li>
+                        </ul>
+
+                    <ul class="nav navbar-nav ms-md-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#mkdocs_search_modal">
+                                <i class="fa fa-search"></i> Search
+                            </a>
+                        </li>
+                            <li class="nav-item">
+                                <a rel="prev" href="../../REFACTORING/" class="nav-link">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" class="nav-link disabled">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                    <div class="col-md-3"><div class="navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggler collapsed" data-bs-toggle="collapse" data-bs-target="#toc-collapse" title="Table of Contents">
+            <span class="fa fa-angle-down"></span>
+        </button>
+    </div>
+
+    
+    <div id="toc-collapse" class="navbar-collapse collapse card bg-body-tertiary">
+        <ul class="nav flex-column">
+            
+            <li class="nav-item" data-bs-level="1"><a href="#source-code" class="nav-link">Source Code</a>
+              <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#example-code-from-claire-accli" class="nav-link">Example code from "@claire-ac/cli"</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+              </ul>
+            </li>
+        </ul>
+    </div>
+</div></div>
+                    <div class="col-md-9" role="main">
+
+<h1 id="source-code">Source Code</h1>
+<h2 id="example-code-from-claire-accli">Example code from "@claire-ac/cli"</h2>
+<h3 id="-askts-on-github">- <a href="https://github.com/CLaiRE-AC/CLaiRE/blob/v0.0.6/src/commands/ask.ts" target="_blank">ask.ts on Github</a></h3>
+<p>Source code file for construction AI prompts for the <a href="https://claire.ac/" target="_blank">CLaiRE API</a></p>
+<pre><code class="language-typescript">  import { Command, Flags } from &quot;@oclif/core&quot;;
+  import axios, { AxiosError } from &quot;axios&quot;;
+  import inquirer from &quot;inquirer&quot;;
+  import cliSpinners from &quot;cli-spinners&quot;; // Animated status indicator
+  import ora from &quot;ora&quot;; // Loading spinner
+  import { loadConfig } from &quot;../utils/config.js&quot;;
+  import { formatCodeBlocks } from &quot;../utils/codeFormatter.js&quot;;
+
+  export default class Ask extends Command {
+    static description = &quot;Send a prompt to CLaiRE API and retrieve a response.&quot;;
+
+    static flags = {
+      prompt: Flags.string({ char: &quot;p&quot;, description: &quot;Prompt to send&quot; }),
+      inputFile: Flags.string({ char: &quot;F&quot;, description: &quot;Path to file(s) containing the question input&quot;, multiple: true }),
+      contextIds: Flags.string({ char: &quot;c&quot;, description: &quot;Comma-separated list of context IDs&quot;, multiple: true }),
+    };
+
+    static examples = [
+      '&lt;%= config.bin %&gt; &lt;%= command.id %&gt; -p &quot;How do I add ActiveAdmin to a Rails 7 app?&quot;',
+      '&lt;%= config.bin %&gt; &lt;%= command.id %&gt; -p &quot;Refactor this file&quot; -F path/to/src/file.ts',
+      '&lt;%= config.bin %&gt; &lt;%= command.id %&gt; -F path/to/input.txt',
+      '&lt;%= config.bin %&gt; &lt;%= command.id %&gt; -p &quot;Help me combine these files:&quot; -F path/to/file1.ts -F path/to/file2.ts',
+      '&lt;%= config.bin %&gt; &lt;%= command.id %&gt; -p &quot;Analyze this code&quot; -c 123 -c 456',
+    ];
+
+    async run() {
+      const { flags } = await this.parse(Ask);
+      const { token: authToken, host: apiHost } = loadConfig().api;
+      const { id: projectId } = loadConfig().project;
+
+      if (!authToken) {
+        this.error(&quot;Missing CLaiRE API token. Set it using `claire config -k YOUR_AUTH_TOKEN`.&quot;);
+      }
+
+      if (!projectId) {
+        this.error(&quot;CLaiRE Project Not Set. Set it using `claire api:project:set`.&quot;);
+      }
+
+      let content = await this.getInitialQuestion(flags);
+      let contextIds: number[] = this.parseContextIds(flags.contextIds);
+
+      while (true) {
+        try {
+          const questionId = await this.submitQuestion(apiHost, authToken, projectId, content, contextIds);
+          if (!questionId) return;
+
+          contextIds.push(questionId); // Append new question ID to context
+
+          const response = await this.pollForResponse(apiHost, authToken, questionId);
+
+          this.log(&quot;\n💡 CLaiRE API Response:&quot;);
+          this.log(formatCodeBlocks(response));
+
+          const { isFollowUp } = await inquirer.prompt([
+            { type: &quot;confirm&quot;, name: &quot;isFollowUp&quot;, message: &quot;Would you like to ask a follow-up question?&quot;, default: false },
+          ]);
+
+          if (!isFollowUp) break;
+
+          const { followUpQuestion } = await inquirer.prompt([
+            { type: &quot;input&quot;, name: &quot;followUpQuestion&quot;, message: &quot;Enter your follow-up question:&quot; },
+          ]);
+
+          content = followUpQuestion.trim();
+        } catch (error) {
+          this.error(`${error instanceof Error ? error.message : &quot;Unknown error&quot;}`);
+        }
+      }
+    }
+
+    private async submitQuestion(apiHost: string, authToken: string, projectId: number, content: string, contextIds: number[]): Promise&lt;number | null&gt; {
+      try {
+        const response = await axios.post(
+          `${apiHost}/api/questions`,
+          { question: { project_id: projectId, content, context_ids: contextIds } },
+          { headers: { Authorization: `Bearer ${authToken}`, &quot;Content-Type&quot;: &quot;application/json&quot; } }
+        );
+
+        return response.data?.id || null;
+      } catch (error) {
+        const errorMessage = this.extractErrorMessage(error);
+        this.error(`❌ ${errorMessage}`);
+        return null;
+      }
+    }
+
+    private async pollForResponse(apiHost: string, authToken: string, questionId: number): Promise&lt;string&gt; {
+      const spinner = ora({ text: &quot;🔄 Waiting for response from CLaiRE API...&quot;, spinner: cliSpinners.dots }).start();
+      const maxRetries = 50;
+      let attempt = 0;
+
+      while (attempt &lt; maxRetries) {
+        try {
+          await new Promise((resolve) =&gt; setTimeout(resolve, 3000));
+          const response = await axios.get(`${apiHost}/api/responses/${questionId}`, {
+            headers: { Authorization: `Bearer ${authToken}` },
+          });
+
+          if (response.data?.content) {
+            spinner.succeed(&quot;✅ Response received!&quot;);
+            return response.data.content;
+          }
+        } catch (error: any) {
+          const errorMessage = this.extractErrorMessage(error);
+
+          if (error.response?.data?.errors?.includes(&quot;Response doesn't exist&quot;)) {
+            spinner.text = `⏳ Still waiting for CLaiRE API response... [Attempt: ${attempt + 1}/10]`;
+          } else {
+            spinner.fail(`❌ Error fetching response: ${errorMessage}`);
+            throw new Error(errorMessage);
+          }
+        }
+
+        attempt++;
+      }
+
+      spinner.fail(&quot;❌ Timed out waiting for CLaiRE API response.&quot;);
+      throw new Error(&quot;No response received from CLaiRE API after multiple attempts.&quot;);
+    }
+
+    private extractErrorMessage(error: unknown): string {
+      if (axios.isAxiosError(error)) {
+        return error.response?.data?.messages || error.response?.data?.error || error.message || &quot;Unknown API error&quot;;
+      }
+      return error instanceof Error ? error.message : &quot;An unknown error occurred&quot;;
+    }
+
+    private async getInitialQuestion(flags: any): Promise&lt;string&gt; {
+      let prompt = flags.prompt ? flags.prompt.trim() : &quot;&quot;;
+      let fileContents = [];
+
+      if (flags.inputFile &amp;&amp; flags.inputFile.length &gt; 0) {
+        const fs = await import(&quot;fs/promises&quot;);
+
+        for (const filePath of flags.inputFile) {
+          try {
+            const content = (await fs.readFile(filePath, &quot;utf-8&quot;)).trim();
+            fileContents.push(`📄 **File: ${filePath}**\n${content}`);
+          } catch (error) {
+            this.error(`❌ Failed to read input file: ${filePath}`);
+          }
+        }
+      }
+
+      let combinedQuestion = prompt;
+
+      if (fileContents.length &gt; 0) {
+        combinedQuestion += `\n\n---\n${fileContents.join(&quot;\n\n---\n&quot;)}`;
+      }
+
+      if (combinedQuestion.trim()) return combinedQuestion;
+
+      const { userPrompt } = await inquirer.prompt([
+        { type: &quot;input&quot;, name: &quot;userPrompt&quot;, message: &quot;Please enter a prompt:&quot; },
+      ]);
+
+      return userPrompt.trim();
+    }
+
+    private parseContextIds(contextIds: string[] | undefined): number[] {
+      if (!contextIds || contextIds.length === 0) return [];
+
+      try {
+        return contextIds.flatMap(id =&gt; id.split(&quot;,&quot;)).map(id =&gt; parseInt(id.trim(), 10)).filter(id =&gt; !isNaN(id));
+      } catch {
+        this.error(&quot;❌ Invalid context IDs provided. Please ensure they are numbers.&quot;);
+        return [];
+      }
+    }
+  }
+</code></pre></div>
+            </div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script src="../../../js/bootstrap.bundle.min.js"></script>
+        <script>
+            var base_url = "../../..",
+                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
+        </script>
+        <script src="../../../js/base.js"></script>
+        <script src="../../../search/main.js"></script>
+
+        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>From here you can search these documents. Enter your search terms below.</p>
+                <form>
+                    <div class="form-group">
+                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>
