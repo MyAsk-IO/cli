@@ -53,7 +53,7 @@
                                 <a href="./" class="nav-link active" aria-current="page">Code Refactoring</a>
                             </li>
                             <li class="nav-item">
-                                <a href="../code-files/prompt.ts/" class="nav-link">ask.ts Source File</a>
+                                <a href="../code-files/prompt.ts/" class="nav-link">prompt.ts Source File</a>
                             </li>
                         </ul>
 
@@ -144,7 +144,7 @@
 </ul>
 <p><br/><br/></p>
 <h2 id="breakdown">Breakdown</h2>
-<p>Refactoring breakdown example of <a href="code-files/ask.ts.md">ask.ts</a></p>
+<p>Refactoring breakdown example of <a href="../code-files/prompt.ts/">prompt.ts</a></p>
 <p>Below is one way to describe what refactoring might look like for each "model" (here understood as a refactoring‐strategy level) along with the corresponding "cost" in OpenAI tokens. In our example, the dictionary</p>
 <p>{ "o3-mini": 0, "o1-mini": 1, "gpt-4o-mini": 2, "gpt-4o": 3, "chatgpt-4o-latest": 4 }</p>
 <p>indicates that the simplest "refactoring model" (o3-mini) would propose almost no changes (0 tokens) while the most "expensive" one (chatgpt-4o-latest) would outline a comprehensive refactor (costing 4 tokens).</p>
@@ -207,7 +207,7 @@
 <hr />
 <h2 id="summary">Summary</h2>
 <hr />
-<p>Each "model" in our list represents a different "level" of refactoring intensity, with the number indicating the estimated token count (or "cost") to generate that full refactor plan via an API call. Lower token costs (0–1) mean very little change, while higher costs (3–4) mean a comprehensive, multi-step transformation. The above breakdown serves as one interpretation of how you might refactor the provided ask.ts file in progressively larger "chunks" of change.</p></div>
+<p>Each "model" in our list represents a different "level" of refactoring intensity, with the number indicating the estimated token count (or "cost") to generate that full refactor plan via an API call. Lower token costs (0–1) mean very little change, while higher costs (3–4) mean a comprehensive, multi-step transformation. The above breakdown serves as one interpretation of how you might refactor the provided prompt.ts file in progressively larger "chunks" of change.</p></div>
             </div>
         </div>
 
