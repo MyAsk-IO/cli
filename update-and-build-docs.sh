@@ -2,14 +2,14 @@ echo "Copying README.md to myask-docs"
 cp README.md myask-docs/docs/index.md
 echo "Entering myask-docs directory"
 cd myask-docs
-echo "Building CLaiRE documentation"
+echo "Building MyAsk documentation"
 mkdocs build
-echo "Deploying CLaiRE documentation to gh-pages"
+echo "Deploying MyAsk documentation to gh-pages"
 mkdocs gh-deploy
 echo "Checking in changed files"
 git add docs/ site/
 echo "Committing updated documentation"
-git commit -m "Rebuilt CLaiRE documentation"
+git commit -m "Rebuilt MyAsk documentation"
 echo "Entering main directory"
 cd ..
 echo "Adding CNAME to gh-pages"
