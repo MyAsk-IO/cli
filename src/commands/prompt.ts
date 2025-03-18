@@ -1,4 +1,4 @@
-import { Command, Flags } from "@oclif/core";
+import { Command, Flags, Args } from "@oclif/core";
 import axios, { AxiosError } from "axios";
 import inquirer from "inquirer";
 import cliSpinners from "cli-spinners"; // Animated status indicator
@@ -8,6 +8,10 @@ import { formatCodeBlocks } from "../utils/codeFormatter.js";
 
 export default class Prompt extends Command {
   static description = "Send a prompt to MyAsk API and retrieve a response.";
+
+  static args = {
+    prompt: Args.string({ description: "Prompt to send" }),
+  };
 
   static flags = {
     prompt: Flags.string({ char: "p", description: "Prompt to send" }),
@@ -24,7 +28,7 @@ export default class Prompt extends Command {
   ];
 
   async run() {
-    const { flags } = await this.parse(Prompt);
+    const { flags, args } = await this.parse(Prompt);
     const { token: authToken, host: apiHost } = loadConfig().api;
     const { id: projectId } = loadConfig().project;
 
@@ -36,7 +40,7 @@ export default class Prompt extends Command {
       this.error("MyAsk Project Not Set. Set it using `myask api:project:set`.");
     }
 
-    let content = await this.getInitialQuestion(flags);
+    let content = await this.getInitialQuestion(args, flags);
     let contextIds: number[] = this.parseContextIds(flags.contextIds);
 
     while (true) {
@@ -125,8 +129,8 @@ export default class Prompt extends Command {
     return error instanceof Error ? error.message : "An unknown error occurred";
   }
 
-  private async getInitialQuestion(flags: any): Promise<string> {
-    let prompt = flags.prompt ? flags.prompt.trim() : "";
+  private async getInitialQuestion(args:any, flags: any): Promise<string> {
+    let prompt = args.prompt ? args.prompt : flags.prompt ? flags.prompt?.trim() : "";
     let fileContents = [];
 
     if (flags.inputFile && flags.inputFile.length > 0) {
