@@ -602,7 +602,7 @@ EXAMPLES
 
   $ myask prompt -p "Help me combine these files:" -F path/to/file1.ts -F path/to/file2.ts
 
-  $ myask prompt -p "Analyze this code" -c 123 -c 456
+  $ myask prompt -p "Analyze this code" -c 123,456,789
 ```
 
 _See code: [src/commands/prompt.ts](https://github.com/MyAsk-IO/cli/blob/v0.0.3/src/commands/prompt.ts)_
