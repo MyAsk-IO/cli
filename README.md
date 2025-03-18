@@ -22,7 +22,7 @@ $ npm install -g @myask-io/cli
 $ myask COMMAND
 running command...
 $ myask (--version)
-@myask-io/cli/0.0.2 darwin-arm64 node-v22.14.0
+@myask-io/cli/0.0.3 darwin-arm64 node-v22.14.0
 $ myask --help [COMMAND]
 USAGE
   $ myask COMMAND
@@ -71,7 +71,7 @@ DESCRIPTION
   Send MyAsk invitation to a new user.
 ```
 
-_See code: [src/commands/api/invitation/create.ts](https://github.com/MyAsk-IO/cli/blob/v0.0.2/src/commands/api/invitation/create.ts)_
+_See code: [src/commands/api/invitation/create.ts](https://github.com/MyAsk-IO/cli/blob/v0.0.3/src/commands/api/invitation/create.ts)_
 
 ## `myask api:invitation:list`
 
@@ -85,7 +85,7 @@ DESCRIPTION
   Show sent MyAsk invitations.
 ```
 
-_See code: [src/commands/api/invitation/list.ts](https://github.com/MyAsk-IO/cli/blob/v0.0.2/src/commands/api/invitation/list.ts)_
+_See code: [src/commands/api/invitation/list.ts](https://github.com/MyAsk-IO/cli/blob/v0.0.3/src/commands/api/invitation/list.ts)_
 
 ## `myask api:project:create`
 
@@ -103,7 +103,7 @@ DESCRIPTION
   Create new project in MyAsk API
 ```
 
-_See code: [src/commands/api/project/create.ts](https://github.com/MyAsk-IO/cli/blob/v0.0.2/src/commands/api/project/create.ts)_
+_See code: [src/commands/api/project/create.ts](https://github.com/MyAsk-IO/cli/blob/v0.0.3/src/commands/api/project/create.ts)_
 
 ## `myask api:project:delete [PROJECTID]`
 
@@ -124,7 +124,7 @@ DESCRIPTION
   Delete MyAsk project
 ```
 
-_See code: [src/commands/api/project/delete.ts](https://github.com/MyAsk-IO/cli/blob/v0.0.2/src/commands/api/project/delete.ts)_
+_See code: [src/commands/api/project/delete.ts](https://github.com/MyAsk-IO/cli/blob/v0.0.3/src/commands/api/project/delete.ts)_
 
 ## `myask api:project:set`
 
@@ -138,7 +138,7 @@ DESCRIPTION
   List users projects and set active project in MyAsk config.
 ```
 
-_See code: [src/commands/api/project/set.ts](https://github.com/MyAsk-IO/cli/blob/v0.0.2/src/commands/api/project/set.ts)_
+_See code: [src/commands/api/project/set.ts](https://github.com/MyAsk-IO/cli/blob/v0.0.3/src/commands/api/project/set.ts)_
 
 ## `myask api:project:show [PROJECTID]`
 
@@ -159,7 +159,7 @@ DESCRIPTION
   Show information for MyAsk project
 ```
 
-_See code: [src/commands/api/project/show.ts](https://github.com/MyAsk-IO/cli/blob/v0.0.2/src/commands/api/project/show.ts)_
+_See code: [src/commands/api/project/show.ts](https://github.com/MyAsk-IO/cli/blob/v0.0.3/src/commands/api/project/show.ts)_
 
 ## `myask api:project:update`
 
@@ -173,7 +173,7 @@ DESCRIPTION
   Update project information in MyAsk API
 ```
 
-_See code: [src/commands/api/project/update.ts](https://github.com/MyAsk-IO/cli/blob/v0.0.2/src/commands/api/project/update.ts)_
+_See code: [src/commands/api/project/update.ts](https://github.com/MyAsk-IO/cli/blob/v0.0.3/src/commands/api/project/update.ts)_
 
 ## `myask api:question:delete [QUESTIONID]`
 
@@ -194,7 +194,7 @@ DESCRIPTION
   Delete MyAsk question
 ```
 
-_See code: [src/commands/api/question/delete.ts](https://github.com/MyAsk-IO/cli/blob/v0.0.2/src/commands/api/question/delete.ts)_
+_See code: [src/commands/api/question/delete.ts](https://github.com/MyAsk-IO/cli/blob/v0.0.3/src/commands/api/question/delete.ts)_
 
 ## `myask api:question:show [QUESTIONID]`
 
@@ -216,7 +216,7 @@ DESCRIPTION
   Show details for MyAsk question
 ```
 
-_See code: [src/commands/api/question/show.ts](https://github.com/MyAsk-IO/cli/blob/v0.0.2/src/commands/api/question/show.ts)_
+_See code: [src/commands/api/question/show.ts](https://github.com/MyAsk-IO/cli/blob/v0.0.3/src/commands/api/question/show.ts)_
 
 ## `myask config`
 
@@ -234,7 +234,7 @@ DESCRIPTION
   View current or set new MyAsk configuration values.
 ```
 
-_See code: [src/commands/config.ts](https://github.com/MyAsk-IO/cli/blob/v0.0.2/src/commands/config.ts)_
+_See code: [src/commands/config.ts](https://github.com/MyAsk-IO/cli/blob/v0.0.3/src/commands/config.ts)_
 
 ## `myask help [COMMAND]`
 
@@ -268,7 +268,7 @@ DESCRIPTION
   Display current project and configuration information.
 ```
 
-_See code: [src/commands/info.ts](https://github.com/MyAsk-IO/cli/blob/v0.0.2/src/commands/info.ts)_
+_See code: [src/commands/info.ts](https://github.com/MyAsk-IO/cli/blob/v0.0.3/src/commands/info.ts)_
 
 ## `myask init`
 
@@ -282,7 +282,7 @@ DESCRIPTION
   Initialize MyAsk CLI.
 ```
 
-_See code: [src/commands/init.ts](https://github.com/MyAsk-IO/cli/blob/v0.0.2/src/commands/init.ts)_
+_See code: [src/commands/init.ts](https://github.com/MyAsk-IO/cli/blob/v0.0.3/src/commands/init.ts)_
 
 ## `myask plugins`
 
@@ -586,8 +586,8 @@ ARGUMENTS
   PROMPT  Prompt to send
 
 FLAGS
-  -F, --inputFile=<value>...   Path to file(s) containing the question input
-  -c, --contextIds=<value>...  Comma-separated list of context IDs
+  -F, --inputFile=<value>...   Path to source file(s). (multiple)
+  -c, --contextIds=<value>...  Comma-separated list of context question IDs
   -p, --prompt=<value>         Prompt to send
 
 DESCRIPTION
@@ -605,5 +605,5 @@ EXAMPLES
   $ myask prompt -p "Analyze this code" -c 123 -c 456
 ```
 
-_See code: [src/commands/prompt.ts](https://github.com/MyAsk-IO/cli/blob/v0.0.2/src/commands/prompt.ts)_
+_See code: [src/commands/prompt.ts](https://github.com/MyAsk-IO/cli/blob/v0.0.3/src/commands/prompt.ts)_
 <!-- commandsstop -->

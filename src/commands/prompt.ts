@@ -15,8 +15,8 @@ export default class Prompt extends Command {
 
   static flags = {
     prompt: Flags.string({ char: "p", description: "Prompt to send" }),
-    inputFile: Flags.string({ char: "F", description: "Path to file(s) containing the question input", multiple: true }),
-    contextIds: Flags.string({ char: "c", description: "Comma-separated list of context IDs", multiple: true }),
+    inputFile: Flags.string({ char: "F", description: "Path to source file(s). (multiple)", multiple: true }),
+    contextIds: Flags.string({ char: "c", description: "Comma-separated list of context question IDs", multiple: true }),
   };
 
   static examples = [
@@ -24,7 +24,7 @@ export default class Prompt extends Command {
     '<%= config.bin %> <%= command.id %> -p "Refactor this file" -F path/to/src/file.ts',
     '<%= config.bin %> <%= command.id %> -F path/to/input.txt',
     '<%= config.bin %> <%= command.id %> -p "Help me combine these files:" -F path/to/file1.ts -F path/to/file2.ts',
-    '<%= config.bin %> <%= command.id %> -p "Analyze this code" -c 123 -c 456',
+    '<%= config.bin %> <%= command.id %> -p "Analyze this code" -c 123,456,789',
   ];
 
   async run() {

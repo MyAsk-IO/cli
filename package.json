@@ -1,7 +1,7 @@
 {
   "name": "@myask-io/cli",
   "description": "MyAsk CLI allows users to interact with the MyAsk API directly from their local command line massively streamlining programmer workflow",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "author": "Andrew Chaney (netuoso)",
   "bin": {
     "myask": "./bin/run.js"
